@@ -1,4 +1,3 @@
-
 <?php 
 
 // Loaded using `composer`
@@ -8,61 +7,61 @@ use DebugBar\StandardDebugBar;
 use DebugBar\DataCollector\ExceptionsCollector;
 
 class FirePHP {
-	private $debugbar;
-	private $debugbarRenderer;
-	private $messages;
-	private $enabled;
+    private $debugbar;
+    private $debugbarRenderer;
+    private $messages;
+    private $enabled;
 
-	private function __construct() {
-		$this->debugbar = new StandardDebugBar();
-		$this->debugbarRenderer = $this->debugbar->getJavascriptRenderer();
-		$this->messages = $this->debugbar['messages'];
-	}
+    private function __construct() {
+        $this->debugbar = new StandardDebugBar();
+        $this->debugbarRenderer = $this->debugbar->getJavascriptRenderer();
+        $this->messages = $this->debugbar['messages'];
+    }
 
-	static public function getInstance() {
-		static $instance = null;
-		if (null == $instance) {
-			$instance = new self();
-		}
-		return $instance;
-	}
+    static public function getInstance() {
+        static $instance = null;
+        if (null == $instance) {
+            $instance = new self();
+        }
+        return $instance;
+    }
 
-	public function log($msg) {
-		if ($this->enabled) {$this->messages->log($msg);}
-	}
+    public function log($msg) {
+        if ($this->enabled) {$this->messages->log($msg);}
+    }
 
-	public function debug($msg) {
-		if ($this->enabled) {$this->messages->debug($msg);}
-	}
+    public function debug($msg) {
+        if ($this->enabled) {$this->messages->debug($msg);}
+    }
 
-	public function info($msg) {
-		if ($this->enabled) {$this->messages->info($msg);}
-	}
+    public function info($msg) {
+        if ($this->enabled) {$this->messages->info($msg);}
+    }
 
-	public function warn($msg) {
-		if ($this->enabled) {$this->messages->warning($msg);}
-	}
+    public function warn($msg) {
+        if ($this->enabled) {$this->messages->warning($msg);}
+    }
 
-	public function error($msg) {
-		if ($this->enabled) {$this->messages->error($msg);}
-	}
+    public function error($msg) {
+        if ($this->enabled) {$this->messages->error($msg);}
+    }
 
-	public function setEnabled($enabled) {
-		$this->enabled = $enabled;
-	}
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
 
-	public function renderHead() {
-		$style = "<style type=\"text/css\">
-	    	.phpdebugbar-widgets-toolbar {
-	    		display: none;
-	    	}
-    	</style>";
-		return ( $style . $this->debugbarRenderer->renderHead() );
-	}
+    public function renderHead() {
+        $style = "<style type=\"text/css\">
+            .phpdebugbar-widgets-toolbar {
+                display: none;
+            }
+        </style>";
+        return ( $style . $this->debugbarRenderer->renderHead() );
+    }
 
-	public function render() {
-		return $this->debugbarRenderer->render();	
-	}
+    public function render() {
+        return $this->debugbarRenderer->render();   
+    }
 }
 
 function firephp() {
