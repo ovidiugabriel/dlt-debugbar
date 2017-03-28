@@ -16,6 +16,7 @@ class FirePHP {
         $this->debugbar = new StandardDebugBar();
         $this->debugbarRenderer = $this->debugbar->getJavascriptRenderer();
         $this->messages = $this->debugbar['messages'];
+        $this->enabled = true;
     }
 
     static public function getInstance() {
@@ -51,6 +52,7 @@ class FirePHP {
     }
 
     public function renderHead() {
+        if (! $this->enabled) {return null;}
         $style = "<style type=\"text/css\">
             .phpdebugbar-widgets-toolbar {
                 display: none;
@@ -60,10 +62,12 @@ class FirePHP {
     }
 
     public function render() {
-        return $this->debugbarRenderer->render();   
+        if ($this->enabled) {return $this->debugbarRenderer->render();}
     }
 }
 
-function firephp() {
-    return FirePHP::getInstance();
+function firephp($enabled = true) {
+    $inst = FirePHP::getInstance();
+    $inst->setEnabled($enabled);
+    return $inst;
 }
