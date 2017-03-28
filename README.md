@@ -1,2 +1,2 @@
-# dlt-debugbar
-DLT Debugbar for Web Browser (JavaScript) / Optional PHP Backend
+# fb-debugbar
+A PHP debug bar with FirePHP API interface
